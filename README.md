@@ -6,11 +6,12 @@
 [docs-latest-img]: https://img.shields.io/badge/docs-latest-blue.svg
 [docs-latest-url]: http://petrkryslucsd.github.io/FinEtoolsMeshing.jl/latest/
 
-# FinEtoolsMeshing: Meshing of geometries defined as voxel volumes
+# FinEtoolsMeshing: Meshing of various geometries, techniques of processing meshes (import, export).
 
 
 [`FinEtools`](https://github.com/PetrKryslUCSD/FinEtools.jl.git) is a package
-for basic operations on finite element meshes. `FinEtoolsMeshing` uses `FinEtools` to mesh three-dimensional geometries defined as voxel volumes.
+for basic operations on finite element meshes. `FinEtoolsMeshing` uses `FinEtools` to mesh various geometries,
+to process meshes, export&import meshes, etc.
 
 ## News
 
@@ -18,9 +19,6 @@ for basic operations on finite element meshes. `FinEtoolsMeshing` uses `FinEtool
 
 [Past news](oldnews.md)
 
-
-<img src="http://hogwarts.ucsd.edu/~pkrysl/site.images/Labrador.png">
-<img src="http://hogwarts.ucsd.edu/~pkrysl/site.images/Labrador-teeth-30.png">
 
 ## How to test the package
 
