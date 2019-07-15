@@ -67,11 +67,12 @@ Test the package:
    Testing FinEtoolsMeshing
  Resolving package versions...
 Test Summary: | Pass  Total
-Meshing       |   46     46
- 57.309493 seconds (597.63 M allocations: 67.252 GiB, 19.33% gc time)
+Meshing       |  101    101
+ 77.451872 seconds (529.16 M allocations: 32.984 GiB, 8.64% gc time)
+Test Summary: | Pass  Total
+Miscellaneous |  210    210
+ 15.543236 seconds (37.18 M allocations: 2.201 GiB, 4.57% gc time)
    Testing FinEtoolsMeshing tests passed
-
-(FinEtoolsMeshing) pkg>
 ```
 
 ## Examples
