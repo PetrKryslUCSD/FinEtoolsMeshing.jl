@@ -11,9 +11,8 @@ function trunc_cyl_shell_mesh()
     nh = 6; nl  = 20; nc = 60;
     # nh = 3; nl  = 8; nc = 30;
     tolerance = h / nh / 100;
-    
+
     t0 = time()
-    MR = DeforModelRed3D
     fens, fes  = H8block(h, l, 2.0 * pi, nh, nl, nc)
     # Shape into a cylinder
     R = zeros(3, 3)
@@ -29,20 +28,20 @@ function trunc_cyl_shell_mesh()
     # File =  "unit_cube_modes.vtk"
     # vtkexportmesh(File, fens, fes)
     # @async run(`"paraview.exe" $File`)
-    
+
     candidates = selectnode(fens, box = boundingbox([Rmed - h -Inf 0.0; Rmed + h +Inf 0.0]), inflate = tolerance)
     fens, fes = mergenodes(fens, fes,  tolerance, candidates);
-    
+
     # fens,fes = mergenodes(fens, fes,  tolerance);
-    
+
     println("  after merging  = $(count(fens))")
-    
+
     println("Mesh generation ($(time() - t0) sec)")
-    
+
     File =  "trunc_cyl_shell_mesh.vtk"
     vtkexportmesh(File, fens, fes)
     @async run(`"paraview.exe" $File`)
-    
+
 end # trunc_cyl_shell_mesh
 
 
@@ -55,9 +54,8 @@ function trunc_cyl_shell_mesh_2()
     nh = 6; nl  = 20; nc = 60;
     # nh = 3; nl  = 8; nc = 30;
     tolerance = h/nh/100;
-    
+
     t0 = time()
-    MR = DeforModelRed3D
     fens,fes  = H8block(h,l,2.0*pi,nh,nl,nc)
     # Shape into a cylinder
     R = zeros(3, 3)
@@ -73,27 +71,27 @@ function trunc_cyl_shell_mesh_2()
     # File =  "unit_cube_modes.vtk"
     # vtkexportmesh(File, fens, fes)
     # @async run(`"paraview.exe" $File`)
-    
+
     candidates = selectnode(fens, plane = [0.0 0.0 1.0 0.0], inflate = tolerance)
     fens,fes = mergenodes(fens, fes,  tolerance, candidates);
-    
+
     # fens,fes = mergenodes(fens, fes,  tolerance);
-    
+
     println("  after merging  = $(count(fens))")
-    
+
     println("Mesh generation ($(time() - t0) sec)")
-    
+
     File =  "trunc_cyl_shell_mesh_2.vtk"
     vtkexportmesh(File, fens, fes)
     @async run(`"paraview.exe" $File`)
-    
+
 end # trunc_cyl_shell_mesh_2
 
 function allrun()
-    println("#####################################################") 
+    println("#####################################################")
     println("# trunc_cyl_shell_mesh ")
     trunc_cyl_shell_mesh()
-    println("#####################################################") 
+    println("#####################################################")
     println("# trunc_cyl_shell_mesh_2 ")
     trunc_cyl_shell_mesh_2()
     return true
