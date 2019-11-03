@@ -771,7 +771,7 @@ function test()
     fens.xyz = xyz3(fens)
     fens.xyz[2, 3] += L/2
     File = "mesh.vtk"
-    MeshExportModule.vtkexportmesh(File, fens, fes)
+    MeshExportModule.VTK.vtkexportmesh(File, fens, fes)
     csmatout = zeros(FFlt, 3, 2)
     gradNparams = FESetModule.bfundpar(fes, vec([0.0 0.0]));
     J = zeros(3, 2)
@@ -794,7 +794,7 @@ using FinEtools
 using Test
 function test()
     f = NodalField(zeros(5, 1))
-    setebc!(f, [3,4], true, 1;        val=7.0)
+    setebc!(f, [3,4], true, 1, 7.0)
     # display(f)
     applyebc!(f)
     dest = zeros(2,1)
@@ -815,7 +815,7 @@ function test()
 
 
     f = NodalField(zeros(5, 1))
-    setebc!(f, [3,4], 1; val=8.2)
+    setebc!(f, [3,4], 1, 8.2)
     # display(f)
     applyebc!(f)
     dest = zeros(2,1)
@@ -1205,7 +1205,7 @@ mmbisecty.test()
 
 module mmh2libexporttri
 using FinEtools
-import FinEtools.MeshExportModule: h2libexporttri
+import FinEtools.MeshExportModule.H2Lib: h2libexporttri
 using Test
 function test()
 triangles = [4 3 5
