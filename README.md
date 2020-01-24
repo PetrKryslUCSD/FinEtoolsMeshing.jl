@@ -16,7 +16,8 @@ to process meshes, export&import meshes, etc.
 
 ## News
 
-- 07/18/2019: Tutorial has been added.
+- 01/23/2020: Dependencies have been updated to work with Julia 1.3.1.
+
 
 [Past news](oldnews.md)
 
