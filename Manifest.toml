@@ -52,9 +52,9 @@ uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[FinEtools]]
 deps = ["Arpack", "DelimitedFiles", "LinearAlgebra", "LoopVectorization", "Printf", "Random", "SparseArrays", "Statistics", "StatsBase", "Test", "Unicode"]
-path = "../FinEtools.jl"
+git-tree-sha1 = "7af31280fc800748f1ac6ee5e468ae71432c0151"
 uuid = "91bb5406-6c9a-523d-811d-0644c4229550"
-version = "4.1.0"
+version = "4.2.1"
 
 [[InteractiveUtils]]
 deps = ["Markdown"]
@@ -75,10 +75,10 @@ uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
 
 [[LoopVectorization]]
-deps = ["LinearAlgebra", "OffsetArrays", "SIMDPirates", "SLEEFPirates", "UnPack", "VectorizationBase"]
-git-tree-sha1 = "4bd5f9f8e2196d6d8668336707e80d41bb9fa8c8"
+deps = ["LinearAlgebra", "OffsetArrays", "Parameters", "SIMDPirates", "SLEEFPirates", "VectorizationBase"]
+git-tree-sha1 = "475a6b567d715dd6d8ab4b09ebd67e3301266317"
 uuid = "bdcacae8-1622-11e9-2a5c-532679323890"
-version = "0.6.30"
+version = "0.6.21"
 
 [[Markdown]]
 deps = ["Base64"]
@@ -94,9 +94,9 @@ version = "0.4.3"
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[OffsetArrays]]
-git-tree-sha1 = "4ba4cd84c88df8340da1c3e2d8dcb9d18dd1b53b"
+git-tree-sha1 = "2066e16af994955287f2e03ba1d9e890eb43b0dd"
 uuid = "6fe1bfb0-de20-5000-8ca7-80f57d26f881"
-version = "1.1.1"
+version = "1.1.2"
 
 [[OpenBLAS_jll]]
 deps = ["CompilerSupportLibraries_jll", "Libdl", "Pkg"]
@@ -108,6 +108,12 @@ version = "0.3.9+5"
 git-tree-sha1 = "293b70ac1780f9584c89268a6e2a560d938a7065"
 uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
 version = "1.3.0"
+
+[[Parameters]]
+deps = ["OrderedCollections", "UnPack"]
+git-tree-sha1 = "38b2e970043613c187bd56a995fe2e551821eb4a"
+uuid = "d96e819e-fc66-5662-9728-84c9c7592b0a"
+version = "0.12.1"
 
 [[Pkg]]
 deps = ["Dates", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "UUIDs"]
@@ -130,9 +136,9 @@ uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
 
 [[SIMDPirates]]
 deps = ["VectorizationBase"]
-git-tree-sha1 = "feebb5faa25686183581e0e6ce823afe233dadd6"
+git-tree-sha1 = "c73c72d50a653768b7fb18c8d6ff3be7950e3eb0"
 uuid = "21efa798-c60a-11e8-04d3-e1a92915a26a"
-version = "0.7.17"
+version = "0.6.8"
 
 [[SLEEFPirates]]
 deps = ["Libdl", "SIMDPirates", "VectorizationBase"]
@@ -181,15 +187,15 @@ deps = ["Random", "SHA"]
 uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
 
 [[UnPack]]
-git-tree-sha1 = "e0cb9715adda456f7657e45377fd3063bf87179a"
+git-tree-sha1 = "d4bfa022cd30df012700cf380af2141961bb3bfb"
 uuid = "3a884ed6-31ef-47d7-9d2a-63182c4928ed"
-version = "0.1.0"
+version = "1.0.1"
 
 [[Unicode]]
 uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 
 [[VectorizationBase]]
 deps = ["CpuId", "LinearAlgebra"]
-git-tree-sha1 = "039d1456706ce4d42315b1ee10c217fe2aa614f0"
+git-tree-sha1 = "8abb5697fb64cadccd1bba444c955942d3181e5c"
 uuid = "3d5dd08c-fd9d-11e8-17fa-ed2836048c2f"
-version = "0.10.5"
+version = "0.7.1"
