@@ -12,6 +12,8 @@ to process meshes, export&import meshes, etc.
 
 ## News
 
+
+- 08/28/2020: Dependencies have been updated to work with Julia 1.5.1.
 - 01/23/2020: Dependencies have been updated to work with Julia 1.3.1.
 
 
