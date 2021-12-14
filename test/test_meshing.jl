@@ -3402,10 +3402,10 @@ function test()
     fes = cat(outputfes[1], outputfes[2])
 
     Meshes = Array{Tuple{FENodeSet, AbstractFESet},1}()
-        push!(Meshes, (fens, fes))
-        push!(Meshes, mirrormesh(fens, fes, [0.0, 0.0, -1.0], center, renumb = r))
-        fens, outputfes = mergenmeshes(Meshes, tolerance);
-        fes = cat(outputfes[1], outputfes[2])
+    push!(Meshes, (fens, fes))
+    push!(Meshes, mirrormesh(fens, fes, [0.0, 0.0, -1.0], center, renumb = r))
+    fens, outputfes = mergenmeshes(Meshes, tolerance);
+    fes = cat(outputfes[1], outputfes[2])
     
 # @show count(fes), count(fens)
 # # Postprocessing
