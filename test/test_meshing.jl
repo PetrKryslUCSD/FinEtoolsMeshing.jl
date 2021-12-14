@@ -3374,3 +3374,48 @@ end
 end
 using .mmT4refine20b
 mmT4refine20b.test()
+
+
+module mesh_full_Q4spheren
+using FinEtools
+using FinEtools.MeshExportModule
+using Test
+function test()
+    rex =  2.0; #external radius
+    nr = 13;
+    renumb =  r(c) = c[[2, 1, 4, 3]]
+    center = [0.0, 0.0, 0.0]
+    tolerance = rex/nr/100
+
+    fens, fes = Q4spheren(rex, nr)
+    
+    Meshes = Array{Tuple{FENodeSet, AbstractFESet},1}()
+    push!(Meshes, (fens, fes))
+    push!(Meshes, mirrormesh(fens, fes, [-1.0, 0.0, 0.0], center, renumb = r))
+    fens, outputfes = mergenmeshes(Meshes, tolerance);
+    fes = cat(outputfes[1], outputfes[2])
+    
+    Meshes = Array{Tuple{FENodeSet, AbstractFESet},1}()
+    push!(Meshes, (fens, fes))
+    push!(Meshes, mirrormesh(fens, fes, [0.0, -1.0, 0.0], center, renumb = r))
+    fens, outputfes = mergenmeshes(Meshes, tolerance);
+    fes = cat(outputfes[1], outputfes[2])
+
+    Meshes = Array{Tuple{FENodeSet, AbstractFESet},1}()
+        push!(Meshes, (fens, fes))
+        push!(Meshes, mirrormesh(fens, fes, [0.0, 0.0, -1.0], center, renumb = r))
+        fens, outputfes = mergenmeshes(Meshes, tolerance);
+        fes = cat(outputfes[1], outputfes[2])
+    
+# @show count(fes), count(fens)
+# # Postprocessing
+    vtkexportmesh("sphere-mesh.vtk", fens, fes)
+
+# @show count(fens), count(fes)
+    @test count(fens) == 1178
+    @test count(fes) == 1176
+end
+
+end
+using .mesh_full_Q4spheren
+mesh_full_Q4spheren.test()
