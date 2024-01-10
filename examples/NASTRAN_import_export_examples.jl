@@ -6,7 +6,7 @@ using FinEtools.MeshExportModule
 function NASTRAN_import_export()
     output = import_NASTRAN("$(@__DIR__)" * "/Slot-coarser.nas")
     File = "Slot-coarser.vtk"
-    MeshExportModule.vtkexportmesh(File, output["fens"], output["fesets"][1])
+    MeshExportModule.VTK.vtkexportmesh(File, output["fens"], output["fesets"][1])
     @async run(`"paraview.exe" $File`)
 end # NASTRAN_import_export
 
@@ -17,4 +17,10 @@ function allrun()
     return true
 end # function allrun
 
-end # module NASTRAN_import_export_examples
+
+@info "All examples may be executed with "
+println("using .$(@__MODULE__); $(@__MODULE__).allrun()")
+
+end # module
+nothing
+

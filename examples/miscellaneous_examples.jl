@@ -1,5 +1,6 @@
 module miscellaneous_examples
 using FinEtools
+using FinEtools.MeshExportModule
 
 function circular_hole()
     
@@ -25,7 +26,7 @@ function circular_hole()
     geom = NodalField(fens.xyz)
     
     File =  "elliptical.vtk"
-    vtkexportmesh(File, fes.conn, geom.values, FinEtools.MeshExportModule.Q4)
+    MeshExportModule.VTK.vtkexportmesh(File, fes.conn, geom.values, MeshExportModule.VTK.Q4)
     @async run(`"paraview.exe" $File`)
     
     println("Done")
@@ -55,7 +56,7 @@ function L_shaped_mesh()
     geom = NodalField(fens.xyz)
     
     File =  "L_shape.vtk"
-    vtkexportmesh(File, connasarray(fes), geom.values, FinEtools.MeshExportModule.Q4);
+    MeshExportModule.VTK.vtkexportmesh(File, connasarray(fes), geom.values, MeshExportModule.VTK.Q4);
     @async run(`"paraview.exe" $File`)
     
     println("Done")
@@ -81,7 +82,7 @@ function composite_plate_mesh()
     geom = NodalField(fens.xyz)
     
     File =  "composite.vtk"
-    vtkexportmesh(File, fes.conn, geom.values, FinEtools.MeshExportModule.H8;
+    MeshExportModule.VTK.vtkexportmesh(File, fes.conn, geom.values, MeshExportModule.VTK.H8;
     scalars = [( "Layer", fes.label)])
     @async run(`"paraview.exe" $File`)
     
@@ -104,7 +105,7 @@ function boundary_Q4_example()
     
     bfes = meshboundary(fes)
     File =  "B.vtk"
-    vtkexportmesh(File, bfes.conn, fens.xyz, FinEtools.MeshExportModule.L2)
+    MeshExportModule.VTK.vtkexportmesh(File, bfes.conn, fens.xyz, MeshExportModule.VTK.L2)
     @async run(`"paraview.exe" $File`)
     
 end # boundary_Q4_example
@@ -125,4 +126,8 @@ function allrun()
     return true
 end # function allrun
 
-end # module miscellaneous_examples
+@info "All examples may be executed with "
+println("using .$(@__MODULE__); $(@__MODULE__).allrun()")
+
+end # module
+nothing

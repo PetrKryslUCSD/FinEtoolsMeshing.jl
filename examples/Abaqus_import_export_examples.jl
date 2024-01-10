@@ -1,8 +1,8 @@
 module Abaqus_import_export_examples
+
 using FinEtools
 using FinEtools.MeshExportModule
 using FinEtools.MeshImportModule
-using FinEtools.MeshImportModule: import_ABAQUS
 
 function Abaqus_import_export()
     ## Solid cylinder/taper/sphere—-temperature loading; quadratic brick mesh
@@ -77,7 +77,7 @@ function Abaqus_import_export()
     fens, fes = output["fens"], output["fesets"][1]
     
     File = "LE11NAFEMS_H8.vtk"
-    MeshExportModule.vtkexportmesh(File, fens, fes)
+    MeshExportModule.VTK.vtkexportmesh(File, fens, fes)
     @async run(`"paraview.exe" $File`)
 end # Abaqus_import_export
 
@@ -87,7 +87,7 @@ function Abaqus_import_export_LE10_T10()
     fens, fes = output["fens"], output["fesets"][1]
     
     File = "LE10NAFEMS_T10.vtk"
-    MeshExportModule.vtkexportmesh(File, fens, fes)
+    MeshExportModule.VTK.vtkexportmesh(File, fens, fes)
     @async run(`"paraview.exe" $File`)
 end # Abaqus_import_export_LE10_T10
 
@@ -101,4 +101,8 @@ function allrun()
     return true
 end # function allrun
 
-end # module Abaqus_import_export_examples
+@info "All examples may be executed with "
+println("using .$(@__MODULE__); $(@__MODULE__).allrun()")
+
+end # module
+nothing
