@@ -1,7 +1,7 @@
 name = "FinEtoolsMeshing"
 uuid = "2cd38203-e337-4286-87ff-2ce1a63ddf55"
 authors = ["Petr Krysl <pkrysl@ucsd.edu>"]
-version = "1.1.0"
+version = "1.1.1"
 
 [deps]
 FinEtools = "91bb5406-6c9a-523d-811d-0644c4229550"
