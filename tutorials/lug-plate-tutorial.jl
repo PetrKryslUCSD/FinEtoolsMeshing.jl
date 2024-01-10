@@ -31,8 +31,7 @@ meshes = Array{Tuple{FENodeSet, AbstractFESet},1}()
 
 # First we use the function `Q4elliphole` to generate the red piece of the mesh.
 xradius = r; yradius = r; L = R; H = R; nL = n4; nH = n4; nW = n1
-fens,fes = Q4elliphole(xradius::FFlt, yradius::FFlt, L::FFlt, H::FFlt,
-      nL::FInt, nH::FInt, nW::FInt)
+fens,fes = Q4elliphole(xradius, yradius, L, H, nL, nH, nW)
 
 # We can verify graphically that we obtained what we intended to get:
 File =  "mesh1.vtk"
@@ -44,7 +43,7 @@ push!(meshes, (fens, fes))
 
 # Next we generate the second piece (the green one). It is also produced in the first quadrant of the Cartesian coordinate system.
 rin = r; rex = R; nr = n1; nc = 2*n1; Angl = pi / 2
-fens, fes = Q4annulus(rin::FFlt, rex::FFlt, nr::FInt, nc::FInt, Angl::FFlt)
+fens, fes = Q4annulus(rin, rex, nr, nc, Angl)
 
 # The mesh is rotated by 90° counterclockwise.
 Q = [vec([0.0, 1.0]) vec([-1.0, 0.0])]
@@ -61,7 +60,7 @@ push!(meshes, (fens, fes))
 
 # The third piece is a simple rectangular block.
 Length = H; Width = R; nL = n5; nW = n4
-fens, fes = Q4block(Length::FFlt, Width::FFlt, nL::FInt, nW::FInt)
+fens, fes = Q4block(Length, Width, nL, nW)
 
 # The block is translated to the right by `R`.
 for i in 1:count(fens)
@@ -79,7 +78,7 @@ push!(meshes, (fens, fes))
 tolerance = r / n1 / 100
 
 # This function merges together any number of meshes, and returns the merged nodes and an array of renumbered meshes.
-fens, fesa = mergenmeshes(meshes, tolerance::FFlt)
+fens, fesa = mergenmeshes(meshes, tolerance)
 
 # The finite element sets in the array `fesa` are concatenated into a single finite element set.
 fes = cat(cat(fesa[1], fesa[2]), fesa[3])

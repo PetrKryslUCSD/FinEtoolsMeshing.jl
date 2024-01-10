@@ -12,194 +12,195 @@ This is the mesh of half of the plate. The entire plate can be produced by mirro
 
 First we bring in the packages that we will use. The finite element toolkit by itself has all we need for the mesh generation tasks.
 
-```julia
+````julia
 using FinEtools
-```
+````
 
 The width of the plate is twice the radius of the half-circle with which the plate is rounded off.
 
-```julia
+````julia
 R =  30.0*phun("mm");
-```
+````
 
 The hole for the clevis is of radius:
 
-```julia
+````julia
 r =  10.0*phun("mm");
-```
+````
 
 The length of the blue piece of the mesh is:
 
-```julia
+````julia
 H =  30.0*phun("mm");
-```
+````
 
 The numbers of the element edges: The number of edges radially
 
-```julia
+````julia
 n1 = 7;
-```
+````
 
 and the number of edges across the half-width.
 
-```julia
+````julia
 n4 = 6;
-```
+````
 
 Finally, this is the number of edges along the length within the blue piece of the mesh.
 
-```julia
+````julia
 n5 = 5;
-```
+````
 
 The meshes for the three pieces will be stored in an array of tuples, one for each mesh.
 
-```julia
+````julia
 meshes = Array{Tuple{FENodeSet, AbstractFESet},1}()
-```
+````
 
 First we use the function `Q4elliphole` to generate the red piece of the mesh.
 
-```julia
+````julia
 xradius = r; yradius = r; L = R; H = R; nL = n4; nH = n4; nW = n1
-fens,fes = Q4elliphole(xradius::FFlt, yradius::FFlt, L::FFlt, H::FFlt,
-      nL::FInt, nH::FInt, nW::FInt)
-```
+fens,fes = Q4elliphole(xradius, yradius, L, H, nL, nH, nW)
+````
 
 We can verify graphically that we obtained what we intended to get:
 
-```julia
+````julia
 File =  "mesh1.vtk"
 vtkexportmesh(File, fens, fes)
-```
+````
 
 If you have `paraview`, use the code fragment `@async run(`"paraview.exe" $File`);` to review the generated mesh.
 
 The generated mesh is pushed into the array of meshes.
 
-```julia
+````julia
 push!(meshes, (fens, fes))
-```
+````
 
 Next we generate the second piece (the green one). It is also produced in the first quadrant of the Cartesian coordinate system.
 
-```julia
+````julia
 rin = r; rex = R; nr = n1; nc = 2*n1; Angl = pi / 2
-fens, fes = Q4annulus(rin::FFlt, rex::FFlt, nr::FInt, nc::FInt, Angl::FFlt)
-```
+fens, fes = Q4annulus(rin, rex, nr, nc, Angl)
+````
 
 The mesh is rotated by 90° counterclockwise.
 
-```julia
+````julia
 Q = [vec([0.0, 1.0]) vec([-1.0, 0.0])]
 for i in 1:count(fens)
     fens.xyz[i, :] .=  Q * fens.xyz[i, :]
 end
-```
+````
 
 The second mesh is also exported for viewing.
 
-```julia
+````julia
 File =  "mesh2.vtk"
 vtkexportmesh(File, fens, fes)
-```
+````
 
 The generated mesh is pushed into the array of meshes.
 
-```julia
+````julia
 push!(meshes, (fens, fes))
-```
+````
 
 The third piece is a simple rectangular block.
 
-```julia
+````julia
 Length = H; Width = R; nL = n5; nW = n4
-fens, fes = Q4block(Length::FFlt, Width::FFlt, nL::FInt, nW::FInt)
-```
+fens, fes = Q4block(Length, Width, nL, nW)
+````
 
 The block is translated to the right by `R`.
 
-```julia
+````julia
 for i in 1:count(fens)
     fens.xyz[i, 1] += R
 end
 
 File =  "mesh3.vtk"
 vtkexportmesh(File, fens, fes)
-```
+````
 
 The generated mesh is pushed into the array of meshes.
 
-```julia
+````julia
 push!(meshes, (fens, fes))
-```
+````
 
 Now we merge together the three meshes stored in the array `meshes`.
 The nodes will be merged together if they are within the distance `tolerance`:
 
-```julia
+````julia
 tolerance = r / n1 / 100
-```
+````
 
 This function merges together any number of meshes, and returns the merged nodes and an array of renumbered meshes.
 
-```julia
-fens, fesa = mergenmeshes(meshes, tolerance::FFlt)
-```
+````julia
+fens, fesa = mergenmeshes(meshes, tolerance)
+````
 
 The finite element sets in the array `fesa` are concatenated into a single finite element set.
 
-```julia
+````julia
 fes = cat(cat(fesa[1], fesa[2]), fesa[3])
-```
+````
 
 Again, we can review their current result of the meshing procedure. At this point we have one half of the plate meshed.
 
-```julia
+````julia
 File =  "lug-half-mesh.vtk"
 vtkexportmesh(File, fens, fes)
-```
+````
 
 In the final stages, we mirror the current mesh to get another finite element node set and set of finite elements. The renumbering function needs to be supplied so that the area of the mirrored quadrilaterals is positive.
 
-```julia
+````julia
 fens1, fes1 = mirrormesh(fens, fes, vec([0.0, 1.0]), vec([0.0, 0.0]); renumb = (c) -> c[[1, 4, 3, 2]])
-```
+````
 
 Now the original finite element nodes and elements and the mirrored nodes and elements need to be merged into a single mesh.
 
-```julia
+````julia
 fens, fes1, fes2  =  mergemeshes(fens1, fes1, fens, fes, tolerance);
-```
+````
 
 Again, we get renumbered finite element sets, and we can concatenate them into a single finite elements set.
 
-```julia
+````julia
 fes = cat(fes1,fes2);
-```
+````
 
 This is the final mesh.
 
-```julia
+````julia
 File =  "lug-mesh.vtk"
 vtkexportmesh(File, fens, fes)
-```
+````
 
 We can verify that the merging did not result in any gaps or cracks by extracting the boundary of the final finite element set. It should consist of two pieces: the external curve consisting of three straight line segments and one semi-circle, and the internal curve in the form of a full circle.
 
-```julia
+````julia
 bfes = meshboundary(fes)
 
 File =  "lug-mesh-boundary.vtk"
 vtkexportmesh(File, fens, bfes)
-```
+````
 
 Now view the resulting mesh and verify that it looks as the first image at the top. There should be 481 nodes and 424 quadrilateral finite elements.
 
-```julia
+````julia
 @show count(fens), count(fes)
 @show typeof(fes)
-```
+````
+
+---
 
 *This page was generated using [Literate.jl](https://github.com/fredrikekre/Literate.jl).*
 
