@@ -12,69 +12,45 @@ to process meshes, export&import meshes, etc.
 
 ## News
 
-- 05/22/2021: Updated for Julia 1.6.
-- 08/28/2020: Dependencies have been updated to work with Julia 1.5.1.
-- 01/23/2020: Dependencies have been updated to work with Julia 1.3.1.
+- 01/07/2023: Updated for Julia 1.10 and FinEtools 7.3.0.
+
 
 
 [Past news](oldnews.md)
 
 
-## How to test the package
+## Tutorials
 
-Here is a record of a session to install this package and test it. You should
-see something similar. The git bash running on Windows 10 was used in this
-example.
+There are a number of tutorials explaining the use of this package.
+Check out the [index](https://github.com/PetrKryslUCSD/FinEtoolsDeforLinear.jl/blob/main/tutorials/index.md). The  tutorials themselves can be executed as
+follows:
 
-Clone the repo:
+- Download the package or clone it.
 ```
-$ git clone https://github.com/PetrKryslUCSD/FinEtoolsMeshing.jl.git
-Cloning into 'FinEtoolsMeshing.jl'...
-remote: Enumerating objects: 25, done.
-remote: Counting objects: 100% (25/25), done.
-remote: Compressing objects: 100% (20/20), done.
-remote: Total 25 (delta 1), reused 13 (delta 0), pack-reused 0
-Unpacking objects: 100% (25/25), done.
+git clone https://github.com/PetrKryslUCSD/FinEtoolsDeforLinear.jl.git
 ```
-Change your working directory, and run Julia:
+- Change into the `tutorials` folder: `cd .\FinEtoolsDeforLinear.jl\tutorials`.
+- Start Julia: `julia`.
+- Activate the environment:
 ```
-PetrKrysl@Spectre MINGW64 /tmp/exp
-$ cd FinEtoolsMeshing.jl/
-
-PetrKrysl@Spectre MINGW64 /tmp/exp/FinEtoolsMeshing.jl (master)
-$ julia
-               _
-   _       _ _(_)_     |  Documentation: https://docs.julialang.org
-  (_)     | (_) (_)    |
-   _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
-  | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 1.3.0-DEV.466 (2019-06-28)
- _/ |\__'_|_|_|\__'_|  |  Commit 8d4f6d24c0 (14 days old master)
-|__/                   |
+using Pkg; Pkg.activate("."); Pkg.instantiate();
 ```
-Activate and instantiate the environment:
+- Execute the desired tutorial. Here `name.jl` is the name of the tutorial file:
 ```
-(v1.3) pkg> activate .; instantiate
-Activating environment at `C:\Users\PetrKrysl\Documents\Work-in-progress\tmp\FinEtoolsMeshing.jl\Project.toml`
-  Updating registry at `C:\Users\PetrKrysl\.julia\registries\General`
-  Updating git-repo `https://github.com/JuliaRegistries/General.git`
-
-(FinEtoolsMeshing) pkg>
-```
-Test the package:
-```
-(FinEtoolsMeshing) pkg> test
-   Testing FinEtoolsMeshing
- Resolving package versions...
-Test Summary: | Pass  Total
-Meshing       |   46     46
- 57.309493 seconds (597.63 M allocations: 67.252 GiB, 19.33% gc time)
-   Testing FinEtoolsMeshing tests passed
+include("name.jl")
 ```
 
 ## Examples
 
-
-There are a number of examples. The examples may
+Many examples  are available.
+Begin with changing your working directory to the `examples` folder. Activate
+and instantiate the examples environment.
+```
+using Pkg
+Pkg.activate(".")
+Pkg.instantiate()
+```
+There are a number of examples covering statics and dynamics. The examples may
 be executed as described in the  [conceptual guide to
 `FinEtools`](https://petrkryslucsd.github.io/FinEtools.jl/latest).
+
