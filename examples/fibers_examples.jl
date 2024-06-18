@@ -8,6 +8,8 @@ function fibers_mesh()
     R = 1.0 
     h = R / 2
     d = a + R + (nr - 1) * (a + 2 * R) + a + R
+    Lz = 2.0 * d
+    nlayers = Int(ceil(Lz / h))
     input = """
     curve 1 line 0 0 $(d) 0
     curve 2 line $(d) 0 $(d) $(d)
@@ -60,6 +62,13 @@ function fibers_mesh()
     end
     setlabel!(fes, label)
     #  = triconn,  in  = trigroups, edgeconn = edgeconn, edgegroups = edgegroups);
+
+    fens, fes = T4extrudeT3(
+        fens,
+        fes,
+        nlayers,
+        (X, layer) -> [X[1], X[2], layer * Lz / nlayers],
+    )
 
     File =  "fibers_mesh.vtk"
     vtkexportmesh(File, fens, fes; scalars=[("label", fes.label)])
