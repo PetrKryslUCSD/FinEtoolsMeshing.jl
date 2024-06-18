@@ -1,7 +1,6 @@
 module node_partitioning_examples
 using FinEtools
 using FinEtools.MeshExportModule
-using UnicodePlots
 using Test
 import LinearAlgebra: norm
 

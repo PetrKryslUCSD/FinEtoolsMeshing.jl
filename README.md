@@ -12,33 +12,12 @@ to process meshes, export&import meshes, etc.
 
 ## News
 
+- 06/17/2024: Updated for FinEtools 8.
 - 01/07/2023: Updated for Julia 1.10 and FinEtools 7.3.0.
 
 
+[Past news](#past-news)
 
-[Past news](oldnews.md)
-
-
-## Tutorials
-
-There are a number of tutorials explaining the use of this package.
-Check out the [index](https://github.com/PetrKryslUCSD/FinEtoolsDeforLinear.jl/blob/main/tutorials/index.md). The  tutorials themselves can be executed as
-follows:
-
-- Download the package or clone it.
-```
-git clone https://github.com/PetrKryslUCSD/FinEtoolsDeforLinear.jl.git
-```
-- Change into the `tutorials` folder: `cd .\FinEtoolsDeforLinear.jl\tutorials`.
-- Start Julia: `julia`.
-- Activate the environment:
-```
-using Pkg; Pkg.activate("."); Pkg.instantiate();
-```
-- Execute the desired tutorial. Here `name.jl` is the name of the tutorial file:
-```
-include("name.jl")
-```
 
 ## Examples
 
@@ -54,3 +33,11 @@ There are a number of examples covering statics and dynamics. The examples may
 be executed as described in the  [conceptual guide to
 `FinEtools`](https://petrkryslucsd.github.io/FinEtools.jl/latest).
 
+
+## <a name="past-news"></a>Past news
+
+- 05/22/2021: Updated for Julia 1.6.
+- 08/28/2020: Dependencies have been updated to work with Julia 1.5.1.
+- 01/23/2020: Dependencies have been updated to work with Julia 1.3.1.
+- 07/18/2019: Tutorial has been added.
+- 07/13/2019: Applications are now separated  out from the `FinEtools` package.

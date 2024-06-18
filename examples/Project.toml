@@ -1,4 +1,4 @@
 [deps]
 FinEtools = "91bb5406-6c9a-523d-811d-0644c4229550"
 FinEtoolsMeshing = "2cd38203-e337-4286-87ff-2ce1a63ddf55"
-UnicodePlots = "b8865327-cd53-5732-bb35-84acbb429228"
+Targe2 = "f62361a0-daf5-40d4-849b-fa9ebeca3f63"
